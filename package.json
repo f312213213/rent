@@ -3,18 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.2.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "darkmode-js": "^1.5.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "npm run tailwindcss && react-scripts start",
-    "build": "npm run tailwindcss && react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "tailwindcss": "postcss src/tailwind.css -o src/app_tailwind.css"
   },
@@ -37,9 +40,9 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.3.1",
-    "postcss": "^8.3.6",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.36",
     "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.2.7"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
   }
 }
