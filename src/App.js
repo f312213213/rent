@@ -1,77 +1,49 @@
 import './App.css';
 import RentList from "./components/RentList";
 import Bar from "./components/Bar";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import AddForm from "./components/AddForm";
-
-
+import firebase from "firebase/app";
+import 'firebase/database';
+import Footer from "./components/Footer";
 
 function App() {
-    const data = [
-        {
-            name: '日內瓦',
-            size: 7,
-            roomType: '單人套房',
-            prize: 8000,
-            security: true,
-            electric: 4,
-            water: 200,
-            furniture: {
-                refrigerator: true,
-                washingMachine: true,
-                dryer: true,
-                tv: true,
-                AC: true,
-                heater: true,
-                bed: true,
-                wardrobe: true,
-                internet: true,
-                elevator: true,
-                lot: true,
-                sofa: true,
-                desk: true,
-                balcony: true,
-                garbage: true,
-                pet: false,
-                cook: true
-            }
-        },
-        {
-            name: '哈哈',
-            size: 7,
-            roomType: '家庭式',
-            prize: 8000,
-            security: true,
-            electric: 4,
-            water: 200,
-            furniture: {
-                refrigerator: true,
-                washingMachine: true,
-                dryer: true,
-                tv: true,
-                AC: true,
-                heater: true,
-                bed: true,
-                wardrobe: true,
-                internet: true,
-                elevator: true,
-                lot: true,
-                sofa: true,
-                desk: true,
-                balcony: true,
-                garbage: true,
-                pet: false,
-                cook: true
-            }
-        }
-    ]
-    const [rentalInfo, setRentalInfo] = useState(data)
+    const [editing, setEditing] = useState(false)
+    const [data, setData] = useState([])
+    const [rentalInfo, setRentalInfo] = useState([])
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDqKJC73_j8zoNqzYpv4Cn0BO9Q4pcq6Xk",
+        authDomain: "rental-info-28a1c.firebaseapp.com",
+        databaseURL: "https://rental-info-28a1c-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "rental-info-28a1c",
+        storageBucket: "rental-info-28a1c.appspot.com",
+        messagingSenderId: "338425984791",
+        appId: "1:338425984791:web:13ae50f4da76784860a952"
+    }
+
+    if (firebase.apps.length === 0) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    const informationRef = firebase.database().ref('information')
+
+    useEffect(() => {
+        informationRef.on('value', (snapshot) => {
+            setRentalInfo(Object.values(snapshot.val()))
+            setData(Object.values(snapshot.val()))
+        })
+    },[])
+
+    const newInformationRef = informationRef.push()
 
     return (
         <>
-            <Bar setRentalInfo={setRentalInfo} rentalInfo={rentalInfo} data={data}/>
-            <AddForm />
-            <RentList infos={rentalInfo}/>
+            {editing && <AddForm rentalInfo={rentalInfo} setRentalInfo={setRentalInfo} editing={editing} setEditing={setEditing} newInformationRef={newInformationRef}/>}
+            <Bar editing={editing} setEditing={setEditing} setRentalInfo={setRentalInfo} rentalInfo={rentalInfo}
+                 data={data}/>
+            <RentList infos={rentalInfo.reverse()}/>
+            <Footer />
         </>
     );
 }

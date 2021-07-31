@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Bar = ({setRentalInfo, data}) => {
+const Bar = ({editing, setEditing, setRentalInfo, data}) => {
     const searchRef = React.createRef()
 
     const changeHandler = () => {
@@ -11,10 +11,14 @@ const Bar = ({setRentalInfo, data}) => {
             setRentalInfo(searchInfo)
         }
     }
+
+    const clickHandler = () => {
+        setEditing(!editing)
+    }
     return (
-        <div className='w-full h-auto bg-yellow-300 p-2 flex justify-between'>
+        <div className='w-full h-auto bg-yellow-300 p-2 flex justify-between '>
             <input type="text" className='shadow focus:ring-2 rounded  p-1' ref={searchRef} onChange={changeHandler}/>
-            <button className='shadow p-2 ring-2 ring-indigo-300 rounded bg-white w-auto h-auto'>新增一間房子</button>
+            <button onClick={clickHandler} className='shadow transform hover:scale-110 duration-300 p-2 ring-2 ring-indigo-300 rounded bg-white w-auto h-auto z-10'>{editing?'關閉':'新增一間房子'}</button>
         </div>
     );
 };
