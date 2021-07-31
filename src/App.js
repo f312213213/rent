@@ -5,7 +5,6 @@ import React, {useState, useEffect} from "react";
 import AddForm from "./components/AddForm";
 import firebase from "firebase/app";
 import 'firebase/database';
-import Footer from "./components/Footer";
 
 function App() {
     const [editing, setEditing] = useState(false)
@@ -43,7 +42,6 @@ function App() {
             <Bar editing={editing} setEditing={setEditing} setRentalInfo={setRentalInfo} rentalInfo={rentalInfo}
                  data={data}/>
             <RentList infos={rentalInfo.reverse()}/>
-            <Footer />
         </>
     );
 }
