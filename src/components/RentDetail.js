@@ -30,7 +30,7 @@ const RentDetail = ({info}) => {
                     <h1>書桌：  {info.furniture.desk?'有':'沒有'}</h1>
                     <h1>陽台：  {info.furniture.balcony?'有':'沒有'}</h1>
                     <h1>垃圾場：{info.furniture.garbage?'有':'沒有'}</h1>
-                    <h1>養寵物：{info.furniture.pet?'有':'沒有'}</h1>
+                    <h1>養寵物：{info.furniture.pet?'可':'不可'}</h1>
                     <h1>可開伙：{info.furniture.cook?'有':'沒有'}</h1>
                     <button className='z-0 shadow ring-2 ring-indigo-300 hover:bg-yellow-700 transform hover:scale-110 duration-300 bg-yellow-500 w-auto h-auto p-1 rounded mt-1 text-white' onClick={() => setLoadMore(false)}>收合</button>
                 </>

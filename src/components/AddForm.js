@@ -57,8 +57,8 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                     <option value="雙人套房">雙人套房</option>
                     <option value="家庭式">家庭式</option>
                 </select>
-                <input name={'electric'} placeholder={'電費，可直接輸入台電'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
-                <input name={'water'} placeholder={'水費，可直接輸入台電'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
+                <input name={'electric'} placeholder={'電費，可輸入台電'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
+                <input name={'water'} placeholder={'水費，可輸入台水'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
                 <div className='grid grid-cols-3' >
                     <div>
                         <label htmlFor="security" className='text-white'>管理員</label>
