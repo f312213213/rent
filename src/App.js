@@ -29,7 +29,7 @@ function App() {
 
     useEffect(() => {
         informationRef.on('value', (snapshot) => {
-            setRentalInfo(Object.values(snapshot.val()))
+            setRentalInfo(Object.values(snapshot.val()).reverse())
             setData(Object.values(snapshot.val()))
         })
     },[])
@@ -41,7 +41,7 @@ function App() {
             {editing && <AddForm rentalInfo={rentalInfo} setRentalInfo={setRentalInfo} editing={editing} setEditing={setEditing} newInformationRef={newInformationRef}/>}
             <Bar editing={editing} setEditing={setEditing} setRentalInfo={setRentalInfo} rentalInfo={rentalInfo}
                  data={data}/>
-            <RentList infos={rentalInfo.reverse()}/>
+            <RentList infos={rentalInfo}/>
         </>
     );
 }

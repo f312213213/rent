@@ -1,11 +1,17 @@
 import React from 'react';
 
 
-
 const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEditing}) => {
 
-    const submitHandler = (e) =>{
+    const submitHandler = (e) => {
         e.preventDefault()
+        const today = new Date();
+
+        const currentDateTime =
+            today.getFullYear() + '年' +
+            (today.getMonth() + 1) + '月' +
+            today.getDate() + '日'
+
         const data = {
             name: e.target.name.value,
             size: e.target.size.value,
@@ -33,7 +39,8 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                 garbage: e.target.garbage.checked,
                 pet: e.target.pet.checked,
                 cook: e.target.cook.checked
-            }
+            },
+            date: currentDateTime
         }
         setRentalInfo([
             ...rentalInfo,
@@ -46,10 +53,14 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
     return (
         <div className='w-full h-screen bg-gray-700 bg-opacity-40 fixed flex justify-center items-start p-2 z-10'>
             <form className='flex flex-col bg-black p-4 fixed space-y-2' onSubmit={submitHandler}>
-                <input name={'name'} placeholder={'社區名稱'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
-                <input name={'size'} placeholder={'大小：坪'} type='number' className='focus:ring-2 rounded  p-2' required={true}/>
-                <input name={'prize'} placeholder={'價格'} type="number" className='focus:ring-2 rounded  p-2' required={true}/>
-                <input name={'address'} placeholder={'地址'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
+                <input name={'name'} placeholder={'社區名稱'} type="text" className='focus:ring-2 rounded  p-2'
+                       required={true}/>
+                <input name={'size'} placeholder={'大小：坪'} type='number' className='focus:ring-2 rounded  p-2'
+                       required={true}/>
+                <input name={'prize'} placeholder={'價格'} type="number" className='focus:ring-2 rounded  p-2'
+                       required={true}/>
+                <input name={'address'} placeholder={'地址'} type="text" className='focus:ring-2 rounded  p-2'
+                       required={true}/>
                 <select name="roomType" id="roomType">
                     <option value="單人套房">單人套房</option>
                     <option value="單人雅房">單人雅房</option>
@@ -57,20 +68,25 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                     <option value="雙人套房">雙人套房</option>
                     <option value="家庭式">家庭式</option>
                 </select>
-                <input name={'electric'} placeholder={'電費，可輸入台電'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
-                <input name={'water'} placeholder={'水費，可輸入台水'} type="text" className='focus:ring-2 rounded  p-2' required={true}/>
-                <div className='grid grid-cols-3' >
+                <input name={'electric'} placeholder={'電費，可輸入台電'} type="text" className='focus:ring-2 rounded  p-2'
+                       required={true}/>
+                <input name={'water'} placeholder={'水費，可輸入台水'} type="text" className='focus:ring-2 rounded  p-2'
+                       required={true}/>
+                <div className='grid grid-cols-3'>
                     <div>
                         <label htmlFor="security" className='text-white'>管理員</label>
-                        <input name={'security'} id={'security'} value="true" type="checkbox" className='focus:ring-2 rounded p-1'/>
+                        <input name={'security'} id={'security'} value="true" type="checkbox"
+                               className='focus:ring-2 rounded p-1'/>
                     </div>
                     <div>
                         <label htmlFor="refrigerator" className='text-white'>冰箱</label>
-                        <input name={'refrigerator'} id={'refrigerator'} type="checkbox" value={'true'} className='focus:ring-2 rounded p-1'/>
+                        <input name={'refrigerator'} id={'refrigerator'} type="checkbox" value={'true'}
+                               className='focus:ring-2 rounded p-1'/>
                     </div>
                     <div>
                         <label htmlFor="washingMachine" className='text-white'>洗衣機</label>
-                        <input name={'washingMachine'} id={'washingMachine'} type="checkbox" className='focus:ring-2 rounded p-1'/>
+                        <input name={'washingMachine'} id={'washingMachine'} type="checkbox"
+                               className='focus:ring-2 rounded p-1'/>
                     </div>
                     <div>
                         <label htmlFor="dryer" className='text-white'>烘衣機</label>
@@ -133,7 +149,8 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                         <input name={'cook'} id={'cook'} type="checkbox" className='focus:ring-2 rounded p-1'/>
                     </div>
                 </div>
-                <button type={'submit'} className='shadow ring-2 ring-indigo-300 rounded bg-white w-auto h-auto'>送出</button>
+                <button type={'submit'} className='shadow ring-2 ring-indigo-300 rounded bg-white w-auto h-auto'>送出
+                </button>
             </form>
         </div>
     );

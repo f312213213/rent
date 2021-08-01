@@ -11,6 +11,7 @@ const RentDetail = ({info}) => {
             <h1>電費：{info.electric}</h1>
             <h1>水費：{info.water}</h1>
             <h1>地址：{info.address}</h1>
+            <h1>時間：{info.date}</h1>
             {!loadMore && <button className='z-0 shadow ring-2 ring-indigo-300 hover:bg-yellow-700 transform hover:scale-110 duration-300 bg-yellow-500 w-auto h-auto p-1 rounded mt-1 text-white' onClick={() => setLoadMore(true)}>顯示更多</button>}
             {loadMore &&
                 <>
