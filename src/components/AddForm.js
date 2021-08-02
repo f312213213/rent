@@ -40,6 +40,7 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                 pet: e.target.pet.checked,
                 cook: e.target.cook.checked
             },
+            other: e.target.other.value,
             date: currentDateTime
         }
         setRentalInfo([
@@ -149,6 +150,7 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                         <input name={'cook'} id={'cook'} type="checkbox" className='focus:ring-2 rounded p-1'/>
                     </div>
                 </div>
+                <input name={'other'} placeholder={'其他'} type="text" className='focus:ring-2 rounded  p-2'/>
                 <button type={'submit'} className='shadow ring-2 ring-indigo-300 rounded bg-white w-auto h-auto'>送出
                 </button>
             </form>

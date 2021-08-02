@@ -30,7 +30,7 @@ function App() {
     useEffect(() => {
         informationRef.on('value', (snapshot) => {
             setRentalInfo(Object.values(snapshot.val()).reverse())
-            setData(Object.values(snapshot.val()))
+            setData(Object.values(snapshot.val()).reverse())
         })
     },[])
 
