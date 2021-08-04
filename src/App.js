@@ -1,6 +1,7 @@
 import './App.css';
 import RentList from "./components/RentList";
 import Bar from "./components/Bar";
+import Cover from "./components/Cover";
 import React, {useState, useEffect} from "react";
 import AddForm from "./components/AddForm";
 import firebase from "firebase/app";
@@ -10,6 +11,7 @@ function App() {
     const [editing, setEditing] = useState(false)
     const [data, setData] = useState([])
     const [rentalInfo, setRentalInfo] = useState([])
+    const [display, setDisplay] = useState(true)
 
     const firebaseConfig = {
         apiKey: "AIzaSyDqKJC73_j8zoNqzYpv4Cn0BO9Q4pcq6Xk",
@@ -38,6 +40,7 @@ function App() {
 
     return (
         <>
+            {display && <Cover setDisplay={setDisplay} />}
             {editing && <AddForm rentalInfo={rentalInfo} setRentalInfo={setRentalInfo} editing={editing} setEditing={setEditing} newInformationRef={newInformationRef}/>}
             <Bar editing={editing} setEditing={setEditing} setRentalInfo={setRentalInfo} rentalInfo={rentalInfo}
                  data={data}/>

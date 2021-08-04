@@ -5,7 +5,7 @@ const RentDetail = ({info}) => {
 
     return (
         <div
-            className='shadow shadow-lg border-2 border-gray-500 hover:border-gray-800 duration-300 bg-yellow-200 w-48 h-auto rounded m-auto mt-4 p-4 top-0 '>
+            className='shadow shadow-lg border-2 border-gray-500 hover:border-gray-800 duration-300 bg-yellow-200 hover:bg-yellow-300 w-48 h-auto rounded m-auto mt-4 p-4 top-0 '>
             <h1 className='text-center'>{info.name} {info.size}坪</h1>
             <h1>房型：{info.roomType}</h1>
             <h1>{info.prize}元/月</h1>
