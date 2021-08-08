@@ -4,6 +4,7 @@ import Bar from "./components/Bar";
 import Cover from "./components/Cover";
 import React, {useState, useEffect} from "react";
 import AddForm from "./components/AddForm";
+import DarkMode from "./components/DarkMode";
 import firebase from "firebase/app";
 import 'firebase/database';
 
@@ -45,6 +46,7 @@ function App() {
             <Bar editing={editing} setEditing={setEditing} setRentalInfo={setRentalInfo} rentalInfo={rentalInfo}
                  data={data}/>
             <RentList infos={rentalInfo}/>
+            <DarkMode />
         </>
     );
 }
