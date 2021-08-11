@@ -24,11 +24,9 @@ const DarkMode = () => {
         if (localStorage.theme === 'light') {
             document.body.classList.add('dark')
             localStorage.theme = 'dark'
-            console.log('dark')
         } else {
             document.body.classList.remove('dark')
             localStorage.theme = 'light'
-            console.log('light')
         }
     }
 

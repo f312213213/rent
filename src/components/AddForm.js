@@ -1,7 +1,19 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEditing}) => {
+
+    const [ipInfo, setIpInfo] = useState('')
+
+    const getIP = async (url) => {
+        const response = await fetch(url)
+        const res = await response.json()
+        setIpInfo(res)
+    }
+
+    useEffect(() => {
+        getIP('https://ipgeolocation.abstractapi.com/v1/?api_key=20d73411ae6040bc9f1271b5df5b5c26')
+    },[])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -41,7 +53,8 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                 cook: e.target.cook.checked
             },
             other: e.target.other.value,
-            date: currentDateTime
+            date: currentDateTime,
+            ip: ipInfo
         }
         setRentalInfo([
             ...rentalInfo,
@@ -60,8 +73,6 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                        required={true}/>
                 <input name={'prize'} placeholder={'價格'} type="number" className='focus:ring-2 rounded  p-2'
                        required={true}/>
-                <input name={'address'} placeholder={'地址'} type="text" className='focus:ring-2 rounded  p-2'
-                       required={true}/>
                 <select name="roomType" id="roomType">
                     <option value="單人套房">單人套房</option>
                     <option value="單人雅房">單人雅房</option>
@@ -73,6 +84,7 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                        required={true}/>
                 <input name={'water'} placeholder={'水費，可輸入台水'} type="text" className='focus:ring-2 rounded  p-2'
                        required={true}/>
+                <input name={'address'} placeholder={'地址，選填'} type="text" className='focus:ring-2 rounded  p-2'/>
                 <div className='grid grid-cols-3'>
                     <div>
                         <label htmlFor="security" className='text-white'>管理員</label>
