@@ -12,7 +12,7 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
     }
 
     useEffect(() => {
-        getIP('https://ipgeolocation.abstractapi.com/v1/?api_key=20d73411ae6040bc9f1271b5df5b5c26')
+        getIP('https://ipgeolocation.abstractapi.com/v1/?api_key=""')
     },[])
 
     const submitHandler = (e) => {
