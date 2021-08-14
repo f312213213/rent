@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-const DarkMode = () => {
+const DarkMode = ({expand, setExpand}) => {
     useEffect(() => {
         if (localStorage.theme) {
             if (localStorage.theme === 'light') {
@@ -28,12 +28,13 @@ const DarkMode = () => {
             document.body.classList.remove('dark')
             localStorage.theme = 'light'
         }
+        setExpand(!expand)
     }
 
 
 
     return (
-        <button className='dark:bg-white bg-black w-12 h-12 fixed bottom-0 right-0 m-4 rounded-full' onClick={clickHandler}>
+        <button className='dark:bg-white bg-black w-12 h-12 m-2 rounded-full' onClick={clickHandler}>
             🌓
         </button>
     );
