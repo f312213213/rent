@@ -50,10 +50,12 @@ function App() {
 
     useEffect(() => {
         firebase.auth().signInAnonymously()
-        informationRef.on('value', (snapshot) => {
-            setRentalInfo(Object.values(snapshot.val()).reverse())
-            setData(Object.values(snapshot.val()).reverse())
-        })
+            .then(() => {
+                informationRef.on('value', (snapshot) => {
+                    setRentalInfo(Object.values(snapshot.val()).reverse())
+                    setData(Object.values(snapshot.val()).reverse())
+                })
+            })
     },[])
 
     const newInformationRef = informationRef.push()
