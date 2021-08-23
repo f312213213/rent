@@ -7,6 +7,7 @@ import AddForm from "./components/AddForm";
 import FunctionList from "./components/FumctionList";
 import firebase from "firebase/app";
 import 'firebase/database';
+import "firebase/auth";
 import ContactForm from "./components/ContactForm";
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
     const editRef = firebase.database().ref('editRecord')
 
     useEffect(() => {
+        firebase.auth().signInAnonymously()
         informationRef.on('value', (snapshot) => {
             setRentalInfo(Object.values(snapshot.val()).reverse())
             setData(Object.values(snapshot.val()).reverse())
