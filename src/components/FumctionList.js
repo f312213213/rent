@@ -11,7 +11,8 @@ const FunctionList = ({showContactForm, setShowContactForm}) => {
             <li className={`${expand?'':'hidden'}`}><Contact expand={expand} setExpand={setExpand} showContactForm={showContactForm} setShowContactForm={setShowContactForm}/></li>
             <li>
                 <button className='dark:bg-white bg-black w-12 h-12 m-2 rounded-full'
-                        onClick={() => setExpand(!expand)}>
+                        onClick={() => setExpand(!expand)}
+                >
                     {
                         !expand
                             ? <i className="fas fa-align-right text-white dark:text-black"></i>
