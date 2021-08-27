@@ -1,10 +1,9 @@
 import React from 'react';
-import {Ring} from "react-spinners-css";
 import Login from "./Login";
 import OutsideMail from "./OutsideMail";
 
 
-const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEditing, logged, loading, setLoading, loginHandler, outside, userInfo, logoutHandler, }) => {
+const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEditing, logged, loading, setLoading, loginHandler, outside, userInfo, logoutHandler}) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -54,10 +53,6 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
             }
 
         }
-        setRentalInfo([
-            ...rentalInfo,
-            data
-        ])
 
         setEditing(!editing)
         newInformationRef.set(data)
@@ -201,10 +196,7 @@ const AddForm = ({newInformationRef, rentalInfo, setRentalInfo, editing, setEdit
                     <button onClick={()=>setEditing(false)} className='absolute top-0 right-0 p-2'>
                         <i className="fas fa-times text-black dark:text-white"></i>
                     </button>
-                    <div className='mx-auto'>
-                        {loading && <Ring color={'#fffff'}/>}
-                    </div>
-                    {!loading && <Login loginHandler={loginHandler}/>}
+                    <Login loginHandler={loginHandler}/>
                 </div>
             </div>
         )

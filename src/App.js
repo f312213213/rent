@@ -10,10 +10,14 @@ import 'firebase/database';
 import "firebase/auth";
 import ContactForm from "./components/ContactForm";
 import {Ring} from "react-spinners-css";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import MyShare from "./components/MyShare";
+import EditForm from "./components/EditForm";
 
 
 function App() {
     const [editing, setEditing] = useState(false)
+    const [editingForm, setEditingForm] = useState(false)
     const [data, setData] = useState([])
     const [rentalInfo, setRentalInfo] = useState([])
     const [display, setDisplay] = useState(true)
@@ -22,6 +26,8 @@ function App() {
     const [loading, setLoading] = useState(false)
     const [userInfo, setUserInfo] = useState({})
     const [outside, setOutside] = useState(true)
+    const [nowEdit, setNowEdit] = useState({})
+
 
 
     //For production
@@ -51,25 +57,44 @@ function App() {
         firebase.initializeApp(firebaseConfig);
     }
 
+    const db = firebase.database()
+    const updateRef = firebase.database().ref()
     const informationRef = firebase.database().ref('information')
     const editRef = firebase.database().ref('editRecord')
 
     useEffect(() => {
         setLoading(true)
         informationRef.on('value', (snapshot) => {
-            const newData = Object.values(snapshot.val()).reverse()
+            const newData = Object.values(snapshot.val())
             newData.forEach(obj => {
                 if (obj.user) {
-                    obj.user = ''
+                    obj.user.name = ''
+                    obj.user.mail = ''
                 }
                 if (obj.ip) {
                     obj.ip = ''
+                    obj.user = {
+                        uid: ""
+                    }
                 }
             })
+
+            let dataKey = []
+
+            informationRef.once('value', (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    dataKey.push(childSnapshot.key)
+                });
+            })
+
+            newData.forEach((data, index) => {
+                data.key = dataKey[index]
+            })
+            newData.reverse()
             setRentalInfo(newData)
             setData(newData)
 
-            setLoading(true)
+
             firebase.auth().getRedirectResult()
                 .then((result) => {
                     if (result.credential) {
@@ -84,9 +109,10 @@ function App() {
                     setLoading(false)
                 })
                 .catch((error) => {
+                    console.error(error)
                     setLoading(false)
                 })
-            setLoading(false)
+
         })
 
     }, [])
@@ -102,7 +128,6 @@ function App() {
         setLoading(true)
         firebase.auth().signOut()
             .then((res) => {
-                console.log(res)
                 setLogged(false)
                 setOutside(true)
                 setUserInfo({})
@@ -114,6 +139,7 @@ function App() {
             .catch((error) => {
                 console.error(error)
             });
+
     }
 
 
@@ -121,22 +147,28 @@ function App() {
     const newEditRef = editRef.push()
 
     return (
-        <>
-            {
-                display && !loading && <Cover setDisplay={setDisplay}/>
-            }
+        <Router>
             {
                 loading &&
-                <div className='fixed w-full h-screen bg-gray-700 opacity-40 z-20 flex justify-center items-center'>
+                <div
+                    className='fixed w-full h-screen bg-gray-700 opacity-40 z-20 flex justify-center items-center z-50'>
                     <Ring color={'#fffff'}/>
                 </div>
             }
             {
-                showContactForm && <ContactForm logoutHandler={logoutHandler} loginHandler={loginHandler}
-                                                setShowContactForm={setShowContactForm}
-                                                newEditRef={newEditRef} userInfo={userInfo} outside={outside}
-                                                loading={loading}
-                                                logged={logged}/>
+                display && !loading && <Cover setDisplay={setDisplay}/>
+            }
+            {
+                showContactForm && <ContactForm
+                    setShowContactForm={setShowContactForm}
+                    newEditRef={newEditRef}
+                    loading={loading}
+                    setLoading={setLoading}
+                />
+            }
+            {
+                editingForm && <EditForm editingForm={editingForm} setEditingForm={setEditingForm} nowEdit={nowEdit}
+                                         setLoading={setLoading} userInfo={userInfo} updateRef={updateRef}/>
             }
             {
                 editing &&
@@ -148,10 +180,21 @@ function App() {
 
             <Bar editing={editing} setEditing={setEditing} setRentalInfo={setRentalInfo} rentalInfo={rentalInfo}
                  data={data} logged={logged} logoutHandler={logoutHandler} loginHandler={loginHandler}/>
-            <RentList infos={rentalInfo}/>
-            <FunctionList showContactForm={showContactForm} setShowContactForm={setShowContactForm}/>
-        </>
+
+            <Switch>
+                <Route path={'/'} exact component={() => <RentList infos={rentalInfo}/>}/>
+                <Route path={'/edit'} exact
+                       component={() => <MyShare infos={rentalInfo} userInfo={userInfo} setEditingForm={setEditingForm}
+                                                 setNowEdit={setNowEdit} db={db}/>}/>
+                {/*<Route path={'/edit'} exact component={() => <MyShare infos={rentalInfo} userInfo={userInfo}/>} />*/}
+            </Switch>
+
+
+            <FunctionList showContactForm={showContactForm} setShowContactForm={setShowContactForm} logged={logged}/>
+        </Router>
     );
 }
+
+;
 
 export default App;

@@ -1,7 +1,9 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom'
 
 const Bar = ({editing, setEditing, setRentalInfo, data, logged, logoutHandler, loginHandler}) => {
     const searchRef = React.createRef()
+    const history = useHistory()
 
     const changeHandler = () => {
         if (searchRef.current.value === '') {
@@ -21,7 +23,11 @@ const Bar = ({editing, setEditing, setRentalInfo, data, logged, logoutHandler, l
                    placeholder={'搜尋社區名稱'}/>
             <div>
                 {logged &&
-                <button onClick={logoutHandler}
+                <button onClick={() => {
+                    logoutHandler()
+                    history.push('/')
+                }
+                }
                         className='shadow transform hover:scale-110 duration-300 p-2 ring-2 ring-indigo-300 rounded bg-white w-auto h-auto mr-2'>登出</button>
                 }
                 <button onClick={clickHandler}
