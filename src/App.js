@@ -186,7 +186,6 @@ function App() {
                 <Route path={'/edit'} exact
                        component={() => <MyShare infos={rentalInfo} userInfo={userInfo} setEditingForm={setEditingForm}
                                                  setNowEdit={setNowEdit} db={db}/>}/>
-                {/*<Route path={'/edit'} exact component={() => <MyShare infos={rentalInfo} userInfo={userInfo}/>} />*/}
             </Switch>
 
 

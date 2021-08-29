@@ -18,7 +18,7 @@ const Bar = ({editing, setEditing, setRentalInfo, data, logged, logoutHandler, l
         setEditing(!editing)
     }
     return (
-        <div className='w-full h-auto bg-yellow-300 p-2 flex justify-between dark:bg-black'>
+        <div className='w-full h-auto bg-yellow-300 p-2 duration-100 flex justify-between dark:bg-gray-900'>
             <input type="text" className='shadow focus:ring-2 rounded  p-1' ref={searchRef} onChange={changeHandler}
                    placeholder={'搜尋社區名稱'}/>
             <div>
@@ -31,7 +31,7 @@ const Bar = ({editing, setEditing, setRentalInfo, data, logged, logoutHandler, l
                         className='shadow transform hover:scale-110 duration-300 p-2 ring-2 ring-indigo-300 rounded bg-white w-auto h-auto mr-2'>登出</button>
                 }
                 <button onClick={clickHandler}
-                        className='shadow transform hover:scale-110 duration-300 p-2 ring-2 ring-indigo-300 rounded bg-white w-auto h-auto'>新增
+                        className='shadow transform hover:scale-110 duration-300 p-2 ring-2 ring-indigo-300 rounded bg-white w-auto h-auto'>{logged ? '新增' : '登入'}
                 </button>
 
 

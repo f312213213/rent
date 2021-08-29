@@ -13,7 +13,7 @@ const ContactForm = ({setShowContactForm, newEditRef, setLoading}) => {
         setLoading(true)
         evt.preventDefault()
         const mailData = {
-            name: nameRef.current.value,
+            topic: nameRef.current.value,
             email: mailRef.current.value,
             text: editRef.current.value,
             completed: false
@@ -43,11 +43,11 @@ const ContactForm = ({setShowContactForm, newEditRef, setLoading}) => {
                 <form className='w-auto h-auto flex flex-col' onSubmit={submitHandler}>
                     <h1 className='text-center text-xl'>聯絡我們</h1>
                     <div className="grid grid-cols-2">
-                        <input name={'name'} placeholder={'姓名'} type="text" ref={nameRef} className='focus:ring-2 rounded p-2 m-1.5 text-black '
+                        <input name={'name'} placeholder={'主旨'} type="text" ref={nameRef} className='focus:ring-2 rounded p-2 m-1.5 text-black '
                                required={true}/>
                         <input type="email" name={'email'} placeholder={'信箱'} ref={mailRef} className='focus:ring-2 rounded p-2 m-1.5 text-black' required={true} />
                     </div>
-                    <textarea required={true} name="edit" placeholder={'想說的話'}  rows="5" ref={editRef} className='focus:ring-2 rounded p-2 m-1.5 resize-none text-black'></textarea>
+                    <textarea required={true} name="edit" placeholder={'內容'}  rows="5" ref={editRef} className='focus:ring-2 rounded p-2 m-1.5 resize-none text-black'></textarea>
 
                     <h1 className='text-center'>{response}</h1>
 
